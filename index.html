@@ -195,6 +195,32 @@
       .footer-copy { max-width: 510px; color: #d5eaff; font-size: 14px; line-height: 1.55; }
       .footer-links { display: flex; flex-wrap: wrap; gap: 12px 22px; max-width: 340px; font-size: 14px; font-weight: 700; }
 
+      .halloween-overlay {
+        position: fixed;
+        z-index: 10;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        background: rgb(0 0 0 / 72%);
+      }
+      .halloween-overlay[hidden] { display: none; }
+      .halloween-card {
+        width: min(500px, 100%);
+        padding: clamp(32px, 7vw, 60px);
+        border: 1px solid #ff5c5c;
+        border-radius: 10px;
+        background: #16080b;
+        box-shadow: 0 0 90px rgb(255 35 35 / 38%);
+        color: #fff4ed;
+        text-align: center;
+      }
+      .halloween-card p { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(30px, 6vw, 48px); line-height: 1.06; }
+      .halloween-card .smile { display: block; margin: 18px 0 28px; color: #ff5964; font-family: Arial, sans-serif; font-size: 74px; font-weight: 700; letter-spacing: -8px; }
+      .halloween-card small { display: block; margin: 0 auto 26px; color: #f2c1bd; font-size: 14px; line-height: 1.5; }
+      .halloween-close { border: 1px solid #ff8890; border-radius: 999px; padding: 11px 20px; background: transparent; color: #fff; cursor: pointer; font: inherit; font-weight: 700; }
+      .halloween-close:hover, .halloween-close:focus-visible { background: #ff4454; outline: 2px solid #fff; outline-offset: 3px; }
+
       @media (max-width: 780px) {
         .utility { min-height: 46px; justify-content: center; padding: 0 14px; }
         .utility-links { display: none; }
@@ -302,5 +328,27 @@
         </nav>
       </div>
     </footer>
+
+    <section class="halloween-overlay" id="halloween-overlay" role="dialog" aria-labelledby="halloween-message" aria-modal="true" hidden>
+      <div class="halloween-card">
+        <p id="halloween-message">The night knows you are here.</p>
+        <span class="smile" aria-hidden="true">:)</span>
+        <small>Just a Halloween message. No location or personal information is collected.</small>
+        <button class="halloween-close" id="halloween-close" type="button">Keep exploring</button>
+      </div>
+    </section>
+    <script>
+      const halloweenOverlay = document.querySelector("#halloween-overlay");
+      const halloweenClose = document.querySelector("#halloween-close");
+
+      window.setTimeout(() => {
+        halloweenOverlay.hidden = false;
+        halloweenClose.focus();
+      }, 15000);
+
+      halloweenClose.addEventListener("click", () => {
+        halloweenOverlay.hidden = true;
+      });
+    </script>
   </body>
 </html>
