@@ -174,8 +174,18 @@
         background: #f6f3ed;
       }
       .story-image {
+        position: relative;
+        display: grid;
         min-height: 420px;
-        background: url("https://wish.org/sites/default/files/styles/paragraph_16x9_preview/public/2024-03/Beautiful%20Wishes%20Danielle%20Story%20Banner%20Photo%20without%20cover%20on%20top%20web.jpg") center / cover;
+        place-items: center;
+        overflow: hidden;
+        background: #dceff9;
+      }
+      .story-image::after {
+        color: #91c9e5;
+        content: "✦";
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 220px;
       }
       .story-copy { display: flex; flex-direction: column; justify-content: center; padding: 56px; }
       .eyebrow { margin: 0 0 15px; color: var(--blue); font-size: 14px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; }
@@ -201,25 +211,49 @@
         inset: 0;
         display: grid;
         place-items: center;
-        padding: 24px;
-        background: rgb(0 0 0 / 72%);
+        padding: 18px;
+        background: rgb(0 0 0 / 62%);
       }
       .halloween-overlay[hidden] { display: none; }
-      .halloween-card {
-        width: min(500px, 100%);
-        padding: clamp(32px, 7vw, 60px);
-        border: 1px solid #ff5c5c;
-        border-radius: 10px;
-        background: #16080b;
-        box-shadow: 0 0 90px rgb(255 35 35 / 38%);
-        color: #fff4ed;
+      .messages-phone {
+        display: grid;
+        grid-template-rows: auto 1fr auto auto;
+        width: min(410px, 100%);
+        height: min(715px, 94dvh);
+        overflow: hidden;
+        border: 7px solid #111;
+        border-radius: 35px;
+        background: #f5f5f7;
+        box-shadow: 0 18px 70px rgb(0 0 0 / 55%);
+        color: #111;
+      }
+      .messages-header {
+        display: grid;
+        grid-template-columns: 36px 1fr 36px;
+        align-items: center;
+        min-height: 88px;
+        padding: 16px 16px 10px;
+        border-bottom: 1px solid #d9d9de;
+        background: rgb(255 255 255 / 92%);
         text-align: center;
       }
-      .halloween-card p { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(30px, 6vw, 48px); line-height: 1.06; }
-      .halloween-card .smile { display: block; margin: 18px 0 28px; color: #ff5964; font-family: Arial, sans-serif; font-size: 74px; font-weight: 700; letter-spacing: -8px; }
-      .halloween-card small { display: block; margin: 0 auto 26px; color: #f2c1bd; font-size: 14px; line-height: 1.5; }
-      .halloween-close { border: 1px solid #ff8890; border-radius: 999px; padding: 11px 20px; background: transparent; color: #fff; cursor: pointer; font: inherit; font-weight: 700; }
-      .halloween-close:hover, .halloween-close:focus-visible { background: #ff4454; outline: 2px solid #fff; outline-offset: 3px; }
+      .messages-back { color: #007aff; font-size: 28px; line-height: 1; }
+      .unknown-avatar { display: grid; width: 35px; height: 35px; place-items: center; margin: 0 auto 2px; border-radius: 50%; background: #8e8e93; color: #fff; font-weight: 700; }
+      .messages-name { font-size: 14px; font-weight: 700; }
+      .messages-kind { color: #8e8e93; font-size: 11px; }
+      .messages-close { width: 30px; height: 30px; border: 0; border-radius: 50%; background: #e5e5ea; color: #58585f; cursor: pointer; font: inherit; font-size: 18px; }
+      .message-list { display: flex; flex-direction: column; gap: 8px; overflow-y: auto; padding: 20px 13px; background: #fff; }
+      .message-list::before { align-self: center; margin-bottom: 6px; color: #8e8e93; content: "Today"; font-size: 11px; }
+      .bubble { max-width: 78%; padding: 9px 12px; border-radius: 18px; font-size: 16px; line-height: 1.25; }
+      .bubble.incoming { align-self: flex-start; border-bottom-left-radius: 4px; background: #e9e9eb; color: #111; }
+      .bubble.outgoing { align-self: flex-end; border-bottom-right-radius: 4px; background: #007aff; color: #fff; }
+      .typing { display: none; align-items: center; width: 52px; height: 32px; padding: 0 12px; border-radius: 17px; background: #e9e9eb; color: #777; letter-spacing: 3px; }
+      .typing.visible { display: flex; }
+      .messages-note { padding: 7px 16px; border-top: 1px solid #ececef; background: #fff; color: #737379; font-size: 10px; line-height: 1.3; text-align: center; }
+      .message-composer { display: flex; gap: 8px; padding: 9px 10px 12px; background: #f7f7f9; }
+      .message-composer input { min-width: 0; flex: 1; border: 1px solid #c8c8cc; border-radius: 18px; padding: 9px 13px; background: #fff; color: #111; font: inherit; font-size: 14px; }
+      .message-composer button { border: 0; padding: 0 8px; background: transparent; color: #007aff; cursor: pointer; font: inherit; font-size: 15px; font-weight: 700; }
+      .messages-close:hover, .messages-close:focus-visible, .message-composer button:hover, .message-composer button:focus-visible { outline: 2px solid #0057b8; outline-offset: 2px; }
 
       @media (max-width: 780px) {
         .utility { min-height: 46px; justify-content: center; padding: 0 14px; }
@@ -329,25 +363,89 @@
       </div>
     </footer>
 
-    <section class="halloween-overlay" id="halloween-overlay" role="dialog" aria-labelledby="halloween-message" aria-modal="true" hidden>
-      <div class="halloween-card">
-        <p id="halloween-message">The night knows you are here.</p>
-        <span class="smile" aria-hidden="true">:)</span>
-        <small>Just a Halloween message. No location or personal information is collected.</small>
-        <button class="halloween-close" id="halloween-close" type="button">Keep exploring</button>
+    <section class="halloween-overlay" id="halloween-overlay" role="dialog" aria-label="Halloween message thread" aria-modal="true" hidden>
+      <div class="messages-phone">
+        <header class="messages-header">
+          <span class="messages-back" aria-hidden="true">‹</span>
+          <div>
+            <div class="unknown-avatar" aria-hidden="true">?</div>
+            <div class="messages-name">Unknown</div>
+            <div class="messages-kind">Text Message</div>
+          </div>
+          <button class="messages-close" id="messages-close" type="button" aria-label="Close conversation">×</button>
+        </header>
+        <div class="message-list" id="message-list" aria-live="polite">
+          <div class="typing" id="typing-indicator" aria-label="Unknown is typing">•••</div>
+        </div>
+        <div class="messages-note">Fictional Halloween thread. Uses only your on-device timezone, clock, and browser label. Nothing is sent or stored.</div>
+        <form class="message-composer" id="message-composer">
+          <input id="message-input" type="text" autocomplete="off" placeholder="iMessage" aria-label="Write a message" />
+          <button type="submit">Send</button>
+        </form>
       </div>
     </section>
     <script>
       const halloweenOverlay = document.querySelector("#halloween-overlay");
-      const halloweenClose = document.querySelector("#halloween-close");
+      const messagesClose = document.querySelector("#messages-close");
+      const messageList = document.querySelector("#message-list");
+      const typingIndicator = document.querySelector("#typing-indicator");
+      const messageForm = document.querySelector("#message-composer");
+      const messageInput = document.querySelector("#message-input");
+
+      const browserName = navigator.userAgent.includes("Edg/")
+        ? "Edge"
+        : navigator.userAgent.includes("Chrome/")
+          ? "Chrome"
+          : navigator.userAgent.includes("Firefox/")
+            ? "Firefox"
+            : navigator.userAgent.includes("Safari/")
+              ? "Safari"
+              : "browser";
+      const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone || "your time zone";
+      const timezoneParts = timezone.split("/");
+      const place = timezoneParts.length > 1 ? timezoneParts.at(-1).replaceAll("_", " ") : "your corner of the world";
+      const localTime = new Intl.DateTimeFormat([], { hour: "numeric", minute: "2-digit" }).format(new Date());
+
+      function addMessage(text, direction) {
+        const message = document.createElement("div");
+        message.className = `bubble ${direction}`;
+        message.textContent = text;
+        messageList.insertBefore(message, typingIndicator);
+        messageList.scrollTop = messageList.scrollHeight;
+      }
+
+      function sendScriptedMessage(text, delay) {
+        window.setTimeout(() => {
+          typingIndicator.classList.add("visible");
+          messageList.scrollTop = messageList.scrollHeight;
+          window.setTimeout(() => {
+            typingIndicator.classList.remove("visible");
+            addMessage(text, "incoming");
+          }, 650);
+        }, delay);
+      }
 
       window.setTimeout(() => {
         halloweenOverlay.hidden = false;
-        halloweenClose.focus();
+        messageInput.focus();
+        sendScriptedMessage("hello?", 500);
+        sendScriptedMessage(`how do you like it there in... ${place}?`, 2800);
+        sendScriptedMessage(`it seems to be ${localTime} for you rn. very cool.`, 5400);
+        sendScriptedMessage(`i like the ${browserName} browser you're in rn. yk?`, 8000);
+        sendScriptedMessage(":)", 10800);
+        sendScriptedMessage("no need to answer. the script keeps going anyway.", 13200);
       }, 15000);
 
-      halloweenClose.addEventListener("click", () => {
+      messagesClose.addEventListener("click", () => {
         halloweenOverlay.hidden = true;
+      });
+
+      messageForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const text = messageInput.value.trim();
+        if (!text) return;
+        addMessage(text, "outgoing");
+        messageInput.value = "";
       });
     </script>
   </body>
